@@ -1,0 +1,11 @@
+Locket Widget Clone for Mobile and Web
+
+1. Mục đích
+	- Học hỏi sâu hơn về JavaScript, các nền tảng lập trình hiện tại như ReactJs, React Native, NodeJs, MongoDb, Express, Socket.io, Docker. Làm được project thực tế và phát triển kỹ năng tư duy.  
+2. Database
+	- Entity:
+		+ User	:	user_id, user_name, user_email, user_phone, user_dOb, user_password, created_at, created_by, updated_at, updated_by, friends[{user_id, status, created_at}](dự kiến không cần bảng phụ vì số lượng friends dự kiến từ 100 đổ lại)
+		+ Photo	:	photo_id, photo_url, photo_caption, created_at, created_by
+		+ Message :	message_id, message_content, created_at, craeted_by
+		+ Album : 	album_id, album_name(đang phân cmn vân), created_at, created_by, updated_at, updated_by, album_users[{user_id, status}], photos[{photo_id}]
+		+ Conversation: conversation_id, user1_id, user2_id, messages[{message_id}]
