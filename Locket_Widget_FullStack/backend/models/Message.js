@@ -20,3 +20,5 @@ const MessageSchema = new Schema({
     ref: "User",
   },
 });
+
+module.exports = mongoose.model("Message", MessageSchema);
