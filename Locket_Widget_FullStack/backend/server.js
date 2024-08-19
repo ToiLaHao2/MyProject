@@ -3,7 +3,7 @@ const { connectDb } = require("./configs/db.js");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const authRouter = require("./routes/auth.js");
+const authRouter = require("./routes/authRoute.js");
 
 dotenv.config();
 
