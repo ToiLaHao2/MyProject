@@ -29,7 +29,7 @@ const UserSchema = new Schema({
   },
   created_At: {
     type: Date,
-    defaul: Date.now,
+    default: Date.now,
   },
   created_By: {
     type: String,
@@ -39,7 +39,7 @@ const UserSchema = new Schema({
     type: Date,
   },
   updated_By: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: "User",
   },
   friends: [
