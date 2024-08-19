@@ -26,7 +26,8 @@ const AlbumSchema = new Schema({
   album_users: [
     {
       user_id: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "User",
       },
       status: {
         type: String,
@@ -36,7 +37,7 @@ const AlbumSchema = new Schema({
   ],
   photos: [
     {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "Photo",
     },
   ],
