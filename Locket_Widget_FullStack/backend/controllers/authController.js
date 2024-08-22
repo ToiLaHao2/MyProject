@@ -1,6 +1,9 @@
 const User = require("../models/User");
-const jwt = require("jsonwebtoken");
-const { HashPassword, CompareHashPassword } = require("../utils/authHelpers");
+const {
+  HashPassword,
+  CompareHashPassword,
+  CompareHashPassword,
+} = require("../utils/authHelpers");
 
 async function Register(req, res) {
   const userRegist = req.body;
@@ -13,7 +16,7 @@ async function Register(req, res) {
     user = new User({
       user_name: userRegist.user_name,
       user_email: userRegist.user_email,
-      user_phone: userRegist.userPhone,
+      user_phone: userRegist.user_phone,
       user_dOb: userRegist.dOb,
       user_password: hashedPassword,
       created_At: Date.now,
@@ -45,4 +48,29 @@ async function Login(req, res) {
   }
 }
 
-module.exports = { Register, Login };
+async function ChangePassword(req, res) {
+  const userRequest = req.body;
+  try {
+    let user = User.findOne({ user_name: userRequest.user_name });
+    let compareHashPassword = CompareHashPassword(
+      userRequest.last_password,
+      user.user_password
+    );
+    if (compareHashPassword) {
+      const newHashPassword = HashPassword(userRequest.user_password);
+      user.updateOne(
+        { user_name: userRequest.user_name },
+        { $set: { user_password: newHashPassword } },
+        (err, result) => {
+          if (err) {
+            console.error("Failed:", err);
+          } else {
+            console.log("Success:", result);
+          }
+        }
+      );
+    }
+  } catch (error) {}
+}
+
+module.exports = { Register, Login, ChangePassword };

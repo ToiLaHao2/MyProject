@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 async function HashPassword(password) {
   try {
@@ -19,4 +20,29 @@ async function CompareHashPassword(password, hashedPassword) {
   }
 }
 
-module.exports = { HashPassword, CompareHashPassword };
+async function CreateToken(id) {
+  try {
+    const token = jwt.sign({ id: id }, process.env.API_KEY, {
+      expiresIn: "1y",
+    });
+    return token;
+  } catch (error) {
+    throw new Error("Token creation failed");
+  }
+}
+
+async function VerifiedToken(token) {
+  try {
+    const verified = jwt.verify(token, process.env.API_KEY);
+    return verified;
+  } catch (err) {
+    throw new Error("Invalid token");
+  }
+}
+
+module.exports = {
+  HashPassword,
+  CompareHashPassword,
+  CreateToken,
+  VerifiedToken,
+};

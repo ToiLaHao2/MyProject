@@ -13,12 +13,35 @@ Locket Widget Clone for Mobile and Web
 3.Server
 	
 	- Use Case : 
-		
 		+ User có thể Đăng nhập, Đăng ký, Edit thông tin bản thân; có thể up ảnh với caption mới, tạo album với friend, chat giữa 2 người
 		+ Album sẽ chứa các ảnh được user chọn, khi tạo tài khoản sẽ có 1 album default để chứa ảnh chia sẽ của mọi friends trong list của user.
 		+ Các user đã kết bạn với nhau sẽ xem được ảnh của nhau, user1 khi kết bạn vs user 2 nhưng không kết bạn với user 3 thì sẽ không thấy được ảnh của user 3.;
 		+ gợi ý kết bạn thông qua số điện thoại.
 		+ có thể tải về album
+		+ có thể xem ảnh của album
+	- Controllers:
+		+ AuthController:	* Register
+							* login
+							* logout(có thể không cần)
+							* edit profile (thông tin cá nhân: email, sdt, nick name)
+							* get profile
+							* update avatar (ảnh sẽ được tải lên 1 cloud free và dùng link để lấy ảnh, đang tìm kiếm)
+		+ UserController: 	* add friend
+							* accept friend	
+							* reject friend
+							* block friend
+							* get friend list
+							* get friend request
+							* get friend profile
+							* get friend photo
+
+		+ PhotoController:	* upload photo
+							* edit photo (chỉnh caption, )
+							* delete photo	
+							* get photo
+							* get photo by album
+		+ AlbumController:  * get album
+							* delete album
 		
 
 
