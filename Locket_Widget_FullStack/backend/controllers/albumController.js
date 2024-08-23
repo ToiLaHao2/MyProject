@@ -8,4 +8,12 @@ async function UpdateAlbum(req, res) {}
 
 async function DeleteAlbum(req, res) {}
 
-async function AddPhoto(req, res) {}
+async function AddPhotoToAlbum(req, res) {}
+
+async function GetAlbumById(req, res) {}
+
+async function DeletePhotoInAlbum(req, res) {}
+
+async function ChangePhotoInAlbum(req, res) {}
+
+module.exports = {}

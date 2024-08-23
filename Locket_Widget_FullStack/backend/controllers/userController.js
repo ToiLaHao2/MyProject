@@ -21,4 +21,5 @@ async function EditProfile(req, res) {}
 async function GetProfile(req, res) {}
 
 async function UpdateAvatar(req, res) {}
+
 module.exports = {};
