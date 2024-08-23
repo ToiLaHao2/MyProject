@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   user_id: {
     type: Schema.Types.ObjectId,
-    default: mongoose.Types.ObjectId,
+    default:new mongoose.Types.ObjectId,
     unique: true,
   },
   user_name: {

@@ -1,25 +1,25 @@
 const User = require("../models/User");
-const {
-  HashPassword,
-  CompareHashPassword,
-  CompareHashPassword,
-} = require("../utils/authHelpers");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema();
+const { HashPassword, CompareHashPassword } = require("../utils/authHelpers");
 
 async function Register(req, res) {
   const userRegist = req.body;
   try {
     let user = User.findOne({ user_name: userRegist.user_name });
-    if (user) {
+    if (!user) {
       return res.status(400).json({ message: "User already exist" });
     }
-    const hashedPassword = HashPassword(userRegist.user_password);
+    const hashedPassword = (
+      await HashPassword(userRegist.user_password)
+    ).toString();
     user = new User({
       user_name: userRegist.user_name,
       user_email: userRegist.user_email,
       user_phone: userRegist.user_phone,
       user_dOb: userRegist.dOb,
       user_password: hashedPassword,
-      created_At: Date.now,
+      created_At: Date.now(),
     });
     await user.save();
   } catch (error) {
