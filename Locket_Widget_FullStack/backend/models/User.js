@@ -45,7 +45,7 @@ const UserSchema = new Schema({
   friends: [
     {
       user_id: {
-        type: String,
+        type: Schema.Types.ObjectId,
         ref: "User",
       },
       status: {

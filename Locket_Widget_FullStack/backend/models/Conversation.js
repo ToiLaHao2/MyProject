@@ -8,11 +8,11 @@ const ConversationSchema = new Schema({
     unique: true,
   },
   user1_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   user2_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   messages: [
