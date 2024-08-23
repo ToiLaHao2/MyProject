@@ -23,28 +23,42 @@ Locket Widget Clone for Mobile and Web
 		+ AuthController:	* Register
 							* login
 							* logout(có thể không cần)
-							* edit profile (thông tin cá nhân: email, sdt, nick name)
-							* get profile
-							* update avatar (ảnh sẽ được tải lên 1 cloud free và dùng link để lấy ảnh, đang tìm kiếm)
-		+ UserController: 	* add friend
+							* change password
+		+ UserController: 	* invite friend
 							* accept friend	
 							* reject friend
-							* block friend
+							* block friend (đang nghĩ coi làm sao)
 							* get friend list
 							* get friend request
 							* get friend profile
 							* get friend photo
-
+							* edit profile (thông tin cá nhân: email, sdt, nick name)
+							* get profile
+							* update avatar (ảnh sẽ được tải lên 1 cloud free và dùng link để lấy ảnh, đang tìm kiếm)
 		+ PhotoController:	* upload photo
 							* edit photo (chỉnh caption, )
 							* delete photo	
 							* get photo
 							* get photo by album
-		+ AlbumController:  * get album
+		+ AlbumController:  * create album
+							* get album
+							* update album
 							* delete album
-		
-
-
+							* add photo
+							* delete photo	
+							* change photo
+		+ ConversationController: 
+							* create conversation
+							* get conversation
+							* update conversation
+							* delete conversation
+							* add message
+							* delete message
+		+ MessageController : 
+							* create message
+							* get message
+							* update message
+							* delete message
 
 *Project structure Express và NodeJS
 	- /Controllers : Chứa các contoller để viết các API

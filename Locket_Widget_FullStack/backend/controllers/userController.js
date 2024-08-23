@@ -22,4 +22,16 @@ async function GetProfile(req, res) {}
 
 async function UpdateAvatar(req, res) {}
 
-module.exports = {};
+module.exports = {
+  InviteFriend,
+  AcceptFriend,
+  RejectFriend,
+  BlockFriend,
+  GetFriendList,
+  GetFriendListRequest,
+  GetFriendProfile,
+  GetFriendPhoto,
+  EditProfile,
+  GetProfile,
+  UpdateAvatar,
+};

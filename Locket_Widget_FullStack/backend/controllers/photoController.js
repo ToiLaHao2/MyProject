@@ -8,6 +8,12 @@ async function DeletePhoto(req, res) {}
 
 async function GetPhoto(req, res) {}
 
-async function GetPhotosByAlbum(params) {}
+async function GetPhotosByAlbum(req, res) {}
 
-module.exports = {};
+module.exports = {
+  UploadPhoto,
+  EditPhoto,
+  DeletePhoto,
+  GetPhoto,
+  GetPhotosByAlbum,
+};

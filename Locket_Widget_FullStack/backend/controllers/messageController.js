@@ -8,4 +8,4 @@ async function UpdateMessage(req, res) {}
 
 async function DeleteMessage(req, res) {}
 
-module.exports = {};
+module.exports = { CreateMessage, GetMessage, UpdateMessage, DeleteMessage };

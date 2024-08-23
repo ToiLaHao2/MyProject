@@ -70,7 +70,10 @@ async function ChangePassword(req, res) {
         }
       );
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log("Error : " + error);
+    res.status(500).json({ message: "Server error" });
+  }
 }
 
 module.exports = { Register, Login, ChangePassword };
