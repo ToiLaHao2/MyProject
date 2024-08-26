@@ -1,5 +1,9 @@
 const express = require("express");
-const { validateRegister } = require("../middleware/authMiddleware");
+const {
+  validateRegister,
+  validateLogin,
+  validationChangePassword,
+} = require("../middleware/authMiddleware");
 const {
   Register,
   Login,
@@ -9,9 +13,9 @@ const {
 const authRouter = express.Router();
 
 authRouter.post("/register", validateRegister, Register);
-authRouter.post("/login", Login);
+authRouter.post("/login", validateLogin, Login);
 // authRouter.post("/logout");
 // authRouter.post("/profile");
-authRouter.post("/changePassword", ChangePassword);
+authRouter.post("/changePassword", validationChangePassword, ChangePassword);
 
 module.exports = authRouter;

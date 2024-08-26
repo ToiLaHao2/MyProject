@@ -1,7 +1,12 @@
 const User = require("../models/User");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema();
-const { HashPassword, CompareHashPassword } = require("../utils/authHelpers");
+const {
+  HashPassword,
+  CompareHashPassword,
+  CreateToken,
+  VerifiedToken,
+} = require("../utils/authHelpers");
 
 async function Register(req, res) {
   const userRegist = req.body;
@@ -21,7 +26,9 @@ async function Register(req, res) {
       user_password: hashedPassword,
       created_At: Date.now(),
     });
-    await user.save();
+    const newUser = await user.save();
+    const token = await CreateToken(newUser._id);
+    res.status(201).json({ message: "Successful register", token: token });
   } catch (error) {
     console.log("Error : " + error);
     res.status(500).json({ message: "Server error" });
@@ -40,7 +47,10 @@ async function Login(req, res) {
       user.user_password
     );
     if (isValidPassword) {
-      return res.status(200).json({ message: "Login successful" });
+      const token = await CreateToken(user._id);
+      return res
+        .status(200)
+        .json({ message: "Login successful", token: token });
     }
   } catch (error) {
     console.log("Error : " + error);
@@ -51,25 +61,18 @@ async function Login(req, res) {
 async function ChangePassword(req, res) {
   const userRequest = req.body;
   try {
-    let user = User.findOne({ user_name: userRequest.user_name });
+    let user = await User.findOne({ user_name: userRequest.user_name });
     let compareHashPassword = CompareHashPassword(
       userRequest.last_password,
       user.user_password
     );
     if (compareHashPassword) {
-      const newHashPassword = HashPassword(userRequest.user_password);
-      user.updateOne(
-        { user_name: userRequest.user_name },
-        { $set: { user_password: newHashPassword } },
-        (err, result) => {
-          if (err) {
-            console.error("Failed:", err);
-          } else {
-            console.log("Success:", result);
-          }
-        }
-      );
+      const newHashPassword = (
+        await HashPassword(userRequest.user_password)
+      ).toString();
+      await user.updateOne({ $set: { user_password: newHashPassword } });
     }
+    res.status(200).json({ message: "Successfull change password" });
   } catch (error) {
     console.log("Error : " + error);
     res.status(500).json({ message: "Server error" });

@@ -1,30 +1,75 @@
 const jwt = require("jsonwebtoken");
+const { validationRules } = require("../utils/validateRules");
+const { VerifiedToken } = require("../utils/authHelpers");
+
+async function getTokenFromHeaders(req) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  return token;
+}
 
 async function validateRegister(req, res, next) {
-  const { user_name, user_email, user_password } = req.body;
-
-  // Kiểm tra username
-  if (!user_name || user_name.length < 3) {
-    return res
-      .status(400)
-      .json({ message: "Username must be at least 3 characters long" });
+  const userRegist = req.body;
+  const rules = validationRules["register"];
+  for (const field of rules.requiredFields) {
+    if (!userRegist[field]) {
+      return res.status(400).json({ error: `Something is missing` });
+    }
   }
-
-  // Kiểm tra email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!user_email || !emailRegex.test(user_email)) {
-    return res.status(400).json({ message: "Invalid email address" });
+  if (userRegist.checkMessage === rules.checkMessage) {
+    if (rules.minLength) {
+      for (const [field, minLen] of Object.entries(rules.minLength)) {
+        if (userRegist[field] && userRegist[field].length < minLen) {
+          return res
+            .status(400)
+            .json({ error: `${field} needed at least ${minLen} characters` });
+        }
+      }
+    }
+    if (rules.regex) {
+      for (const [field, pattern] of Object.entries(rules.regex)) {
+        if (userRegist[field] && !pattern.test(userRegist[field])) {
+          return res.status(400).json({ error: `${field} is not fit` });
+        }
+      }
+    }
   }
-
-  // Kiểm tra password
-  if (!user_password || user_password.length < 6) {
-    return res
-      .status(400)
-      .json({ message: "Password must be at least 6 characters long" });
-  }
-
-  // Nếu tất cả các kiểm tra đều vượt qua, tiếp tục
   next();
 }
 
-module.exports = { validateRegister };
+async function validateLogin(req, res, next) {
+  const userLogin = req.body;
+  const rules = validationRules["login"];
+  for (const field of rules.requiredFields) {
+    if (!userLogin[field]) {
+      return res.status(400).json({ error: `Something is missing` });
+    }
+  }
+  if (userLogin.checkMessage === rules.checkMessage) {
+    next();
+  } else {
+    return res.status(400).json({ error: "Invalid credentials" });
+  }
+}
+
+async function validationChangePassword(req, res, next) {
+  const token = await getTokenFromHeaders(req);
+  const checkToken = await VerifiedToken(token);
+  if (!checkToken) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+  const userRequestChangePassword = req.body;
+  const rules = validationRules["changePassword"];
+  for (const field of rules.requiredFields) {
+    if (!userRequestChangePassword[field]) {
+      return res.status(400).json({ error: `Something is missing` });
+    }
+  }
+  if (userRequestChangePassword.checkMessage === rules.checkMessage) {
+    next();
+  } else {
+    return res.status(400).json({ error: "Invalid credentials" });
+  }
+}
+
+module.exports = { validateRegister, validateLogin, validationChangePassword };
