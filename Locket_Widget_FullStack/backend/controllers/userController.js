@@ -1,6 +1,10 @@
 const User = require("../models/User");
 
-async function InviteFriend(req, res) {}
+async function InviteFriend(req, res) {
+  const requestInvite = req.body;
+  const user = await User.findById(requestInvite.friend_id);
+
+}
 
 async function AcceptFriend(req, res) {}
 

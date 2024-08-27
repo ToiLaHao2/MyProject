@@ -1,12 +1,6 @@
-const jwt = require("jsonwebtoken");
 const { validationRules } = require("../utils/validateRules");
 const { VerifiedToken } = require("../utils/authHelpers");
 
-async function getTokenFromHeaders(req) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-  return token;
-}
 
 async function validateRegister(req, res, next) {
   const userRegist = req.body;

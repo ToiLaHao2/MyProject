@@ -33,6 +33,10 @@ const validationRules = {
       user_password: 6,
     },
   },
+  inviteRequest: {
+    checkMessage: "Invite friend",
+    requiredFields: ["friend_id", "checkMessage"],
+  },
 };
 
 module.exports = { validationRules };
