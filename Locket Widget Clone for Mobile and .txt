@@ -9,7 +9,7 @@ Locket Widget Clone for Mobile and Web
 		+ Message :	message_id, message_content, created_at, craeted_by
 		+ Album : 	album_id, album_name(đang phân cmn vân), created_at, created_by, updated_at, updated_by, album_users[{user_id, status}], photos[{photo_id}]
 		+ Conversation: conversation_id, user1_id, user2_id, messages[{message_id}]
-
+		+ Invitation : sender_id, receiver_id, status, send_at, responded_at
 3.Server
 	
 	- Use Case : 
