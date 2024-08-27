@@ -5,7 +5,6 @@ const {
   HashPassword,
   CompareHashPassword,
   CreateToken,
-  VerifiedToken,
 } = require("../utils/authHelpers");
 
 async function Register(req, res) {

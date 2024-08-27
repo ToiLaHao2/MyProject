@@ -9,7 +9,7 @@ const {
 const photoRouter = express.Router();
 
 photoRouter.post("/uploadPhoto", UploadPhoto);
-photoRouter.post("/editPhoto", EditPhoto);
+// photoRouter.post("/editPhoto", EditPhoto);
 photoRouter.post("/deletePhoto", DeletePhoto);
 photoRouter.post("/getPhoto", GetPhoto);
 photoRouter.post("/getPhotosByAlbum", GetPhotosByAlbum);

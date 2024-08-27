@@ -16,7 +16,7 @@ conversationRouter.post(
   GetAllConversationByUserId
 );
 conversationRouter.post("/getConversation", GetConversation);
-conversationRouter.post("/updateConversation", UpdateConversation);
+// conversationRouter.post("/updateConversation", UpdateConversation);
 conversationRouter.post("/deleteConversation", DeleteConversation);
 conversationRouter.post("/addMessage", AddMessage);
 conversationRouter.post("/deleteMessage", DeleteMessage);

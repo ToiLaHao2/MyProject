@@ -1,6 +1,6 @@
 const { validationRules } = require("../utils/validateRules");
 const { VerifiedToken } = require("../utils/authHelpers");
-
+const { getTokenFromHeaders } = require("../utils/getToken");
 
 async function validateRegister(req, res, next) {
   const userRegist = req.body;

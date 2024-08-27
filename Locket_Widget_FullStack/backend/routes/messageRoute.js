@@ -9,7 +9,7 @@ const messageRouter = express.Router();
 
 messageRouter.post("/createMessage", CreateMessage);
 messageRouter.post("/getMessage", GetMessage);
-messageRouter.post("/updateMessage", UpdateMessage);
-messageRouter.post("/deleteMessage", DeleteMessage);
+// messageRouter.post("/updateMessage", UpdateMessage);
+// messageRouter.post("/deleteMessage", DeleteMessage);
 
 module.exports = { messageRouter };
