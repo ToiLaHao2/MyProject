@@ -1,6 +1,8 @@
 const Album = require("../models/Album.js");
 
-async function CreateAlbum(req, res) {}
+async function CreateAlbum(req, res) {
+  
+}
 
 async function GetAlbum(req, res) {}
 

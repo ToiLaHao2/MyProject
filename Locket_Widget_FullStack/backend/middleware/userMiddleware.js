@@ -45,6 +45,7 @@ async function validateAcceptFriend(req, res, next) {
 }
 
 async function validateRejectInvite(req, res, next) {}
+
 async function validateGetFriendList(req, res, next) {
     const token = await getTokenFromHeaders(req);
     const checkToken = await VerifiedToken(token);
