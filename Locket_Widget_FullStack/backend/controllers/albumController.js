@@ -1,6 +1,7 @@
 const Album = require("../models/Album.js");
 
 async function CreateAlbum(req, res) {
+  const requestCreateAlbum = req.body;
   
 }
 

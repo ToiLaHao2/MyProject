@@ -30,7 +30,7 @@ async function validateAcceptFriend(req, res, next) {
         return res.status(401).json({ error: "Invalid token" });
     }
     const requestAccept = req.body;
-    const rules = validationRules["acceptFriendRequest"];
+    const rules = validationRules["acceptFriendRequ``est"];
     for (const field of rules.requiredFields) {
         if (!requestAccept[field]) {
             return res.status(400).json({ error: `Something is missing` });
