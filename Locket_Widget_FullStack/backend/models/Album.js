@@ -3,11 +3,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const AlbumSchema = new Schema({
-  album_id: {
-    type: Schema.Types.ObjectId,
-    default: mongoose.Types.ObjectId,
-    unique: true,
-  },
   user_id: {
     type: String,
     required: true,
